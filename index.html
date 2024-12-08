@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mason's Barber Shop</title>
+
+    <!-- External Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600&family=Roboto:wght@400;500&display=swap" rel="stylesheet">
+
+    <style>
+        /* Global Styles */
+        body {
+            font-family: 'Open Sans', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f8f8f8;
+        }
+
+        /* Header Styles */
+        header {
+            background-color: #333;
+            color: white;
+            padding: 15px 0;
+            text-align: center;
+            font-size: 1.5rem;
+        }
+
+        header h1 {
+            margin: 0;
+            font-family: 'Roboto', sans-serif;
+            font-weight: 600;
+        }
+
+        /* Service Card Section */
+        .service-cards-container {
+            display: flex;
+            justify-content: space-evenly;
+            flex-wrap: wrap;
+            margin: 20px;
+        }
+
+        .service-card {
+            background-color: white;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+            width: 300px;
+            margin: 10px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            cursor: pointer;
+        }
+
+        .service-card img {
+            width: 100%;
+            border-radius: 8px 8px 0 0;
+        }
+
+        .service-card-content {
+            padding: 20px;
+            text-align: center;
+        }
+
+        .service-card-content h3 {
+            margin-top: 0;
+            font-size: 1.2rem;
+            color: #333;
+        }
+
+        .service-card-content p {
+            font-size: 1rem;
+            color: #777;
+        }
+
+        /* Hover effect on Service Card */
+        .service-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Button Styles */
+        .service-card-button {
+            background-color: #444;
+            color: white;
+            padding: 10px 20px;
+            font-size: 1rem;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            text-transform: uppercase;
+            margin-top: 10px;
+            transition: background-color 0.3s ease;
+        }
+
+        .service-card-button:hover {
+            background-color: #666;
+        }
+
+        /* Footer Styles */
+        footer {
+            background-color: #333;
+            color: white;
+            text-align: center;
+            padding: 10px;
+        }
+
+    </style>
+</head>
+
+<body>
+
+    <!-- Header Section -->
+    <header>
+        <h1>Mason's Barber Shop</h1>
+    </header>
+
+    <!-- Service Cards Section -->
+    <div class="service-cards-container">
+        <div class="service-card" onclick="window.location.href='#'">
+            <img src="https://via.placeholder.com/300x200" alt="Haircut">
+            <div class="service-card-content">
+                <h3>Classic Haircut</h3>
+                <p>A timeless look tailored just for you.</p>
+                <button class="service-card-button">Book Now</button>
+            </div>
+        </div>
+
+        <div class="service-card" onclick="window.location.href='#'">
+            <img src="https://via.placeholder.com/300x200" alt="Beard Trim">
+            <div class="service-card-content">
+                <h3>Beard Trim</h3>
+                <p>Get your beard perfectly shaped and groomed.</p>
+                <button class="service-card-button">Book Now</button>
+            </div>
+        </div>
+
+        <div class="service-card" onclick="window.location.href='#'">
+            <img src="https://via.placeholder.com/300x200" alt="Shave">
+            <div class="service-card-content">
+                <h3>Traditional Shave</h3>
+                <p>Experience the art of the straight razor shave.</p>
+                <button class="service-card-button">Book Now</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer Section -->
+    <footer>
+        <p>&copy; 2024 Mason's Barber Shop | All Rights Reserved</p>
+    </footer>
+
+    <script>
+        // Function to open booking page or show a modal (expandable functionality)
+        document.querySelectorAll('.service-card-button').forEach(button => {
+            button.addEventListener('click', function (e) {
+                e.stopPropagation(); // Prevent the card from redirecting
+                alert('Booking page will open!');
+            });
+        });
+    </script>
+
+</body>
+</html>
