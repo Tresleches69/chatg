@@ -4,159 +4,766 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Mason's Barber Shop</title>
-
-    <!-- External Font -->
-    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600&family=Roboto:wght@400;500&display=swap" rel="stylesheet">
-
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
-        /* Global Styles */
-        body {
-            font-family: 'Open Sans', sans-serif;
+        * {
             margin: 0;
             padding: 0;
-            background-color: #f8f8f8;
+            box-sizing: border-box;
+            font-family: 'Arial', sans-serif;
         }
 
         /* Header Styles */
         header {
-            background-color: #333;
-            color: white;
-            padding: 15px 0;
-            text-align: center;
-            font-size: 1.5rem;
+            background: black;
+            padding: 1rem;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
         }
 
-        header h1 {
-            margin: 0;
-            font-family: 'Roboto', sans-serif;
-            font-weight: 600;
-        }
-
-        /* Service Card Section */
-        .service-cards-container {
+        nav {
+            max-width: 1400px;
+            margin: 0 auto;
             display: flex;
-            justify-content: space-evenly;
-            flex-wrap: wrap;
-            margin: 20px;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 2rem;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 3rem;
+            align-items: center;
+        }
+
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            transition: color 0.3s;
+            font-size: 0.9rem;
+            letter-spacing: 2px;
+            font-weight: 500;
+            position: relative;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            background: #ffd700;
+            left: 0;
+            bottom: -4px;
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .logo {
+            padding: 0 2rem;
+        }
+
+        .logo img {
+            height: 100px;
+            width: auto;
+        }
+
+        .left-links {
+            flex: 1;
+            justify-content: flex-end;
+        }
+
+        .right-links {
+            flex: 1;
+            justify-content: flex-start;
+        }
+
+        /* Mobile styles */
+        @media (max-width: 768px) {
+            nav {
+                flex-direction: column;
+                gap: 1rem;
+                padding: 1rem;
+            }
+
+            .nav-links {
+                justify-content: center;
+                gap: 2rem;
+            }
+
+            .logo {
+                order: -1;
+            }
+        }
+
+        /* Hero Section */
+        .hero {
+            height: 100vh;
+            background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)),
+                        url('./images/hero-background.jpg');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: white;
+        }
+
+        .hero-content {
+            padding: 2rem;
+            background-color: rgba(0, 0, 0, 0.5);
+            border-radius: 10px;
+            backdrop-filter: blur(5px);
+        }
+
+        .hero-content h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+        }
+
+        .hero-content p {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+        }
+
+        .cta-button {
+            background: #ffd700;
+            color: #1a1a1a;
+            padding: 1rem 2rem;
+            border: none;
+            border-radius: 5px;
+            font-size: 1.1rem;
+            cursor: pointer;
+            text-decoration: none;
+            transition: background 0.3s;
+        }
+
+        .cta-button:hover {
+            background: #ffed4a;
+        }
+
+        /* Services Section */
+        .services {
+            padding: 5rem 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
         }
 
         .service-card {
-            background-color: white;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-            border-radius: 8px;
-            width: 300px;
-            margin: 10px;
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-            cursor: pointer;
+            text-align: center;
+            padding: 2rem;
+            background: #f5f5f5;
+            border-radius: 10px;
+            transition: transform 0.3s;
         }
 
-        .service-card img {
-            width: 100%;
-            border-radius: 8px 8px 0 0;
+        .service-card:hover {
+            transform: translateY(-5px);
         }
 
-        .service-card-content {
-            padding: 20px;
+        .service-card i {
+            font-size: 2.5rem;
+            color: #ffd700;
+            margin-bottom: 1rem;
+        }
+
+        /* Hours Section */
+        .hours {
+            background: #1a1a1a;
+            color: white;
+            padding: 5rem 2rem;
+        }
+
+        .hours-content {
+            max-width: 1200px;
+            margin: 0 auto;
             text-align: center;
         }
 
-        .service-card-content h3 {
-            margin-top: 0;
+        .hours-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        /* Contact Section */
+        .contact {
+            padding: 5rem 2rem;
+            background-color: #f5f5f5;
+        }
+
+        .contact-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 2fr;
+            gap: 4rem;
+            padding: 2rem;
+        }
+
+        .contact-info {
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+        }
+
+        .info-item {
+            text-align: left;
+            padding: 1rem;
+        }
+
+        .info-item i {
+            font-size: 1.5rem;
+            color: #1a1a1a;
+            margin-bottom: 1rem;
+        }
+
+        .info-item h3 {
             font-size: 1.2rem;
-            color: #333;
+            margin-bottom: 0.5rem;
+            letter-spacing: 2px;
         }
 
-        .service-card-content p {
-            font-size: 1rem;
-            color: #777;
-        }
-
-        /* Hover effect on Service Card */
-        .service-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
-        }
-
-        /* Button Styles */
-        .service-card-button {
-            background-color: #444;
-            color: white;
-            padding: 10px 20px;
-            font-size: 1rem;
-            border: none;
+        .contact-form {
+            background: white;
+            padding: 3rem;
             border-radius: 5px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        .form-group {
+            position: relative;
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 0.8rem;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 1rem;
+            background: transparent;
+        }
+
+        .form-group textarea {
+            min-height: 150px;
+            resize: vertical;
+        }
+
+        .form-group label {
+            position: absolute;
+            left: 1rem;
+            top: 50%;
+            transform: translateY(-50%);
+            background: white;
+            padding: 0 0.5rem;
+            color: #666;
+            transition: all 0.3s ease;
+            pointer-events: none;
+        }
+
+        .form-group textarea + label {
+            top: 1rem;
+            transform: none;
+        }
+
+        .form-group input:focus + label,
+        .form-group textarea:focus + label,
+        .form-group input:not(:placeholder-shown) + label,
+        .form-group textarea:not(:placeholder-shown) + label {
+            top: 0;
+            font-size: 0.8rem;
+            color: #1a1a1a;
+        }
+
+        .submit-btn {
+            width: 100%;
+            padding: 1rem;
+            background: #1a1a1a;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            font-size: 1rem;
+            letter-spacing: 2px;
             cursor: pointer;
-            text-transform: uppercase;
-            margin-top: 10px;
             transition: background-color 0.3s ease;
         }
 
-        .service-card-button:hover {
-            background-color: #666;
+        .submit-btn:hover {
+            background: #333;
         }
 
-        /* Footer Styles */
+        @media (max-width: 768px) {
+            .contact-container {
+                grid-template-columns: 1fr;
+            }
+
+            .contact-info {
+                text-align: center;
+            }
+
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+
+            .contact-form {
+                padding: 2rem;
+            }
+        }
+
+        /* Footer */
         footer {
-            background-color: #333;
+            background: #1a1a1a;
             color: white;
             text-align: center;
-            padding: 10px;
+            padding: 2rem;
         }
 
+        /* Mobile Responsiveness */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+
+            .hero-content h1 {
+                font-size: 2.5rem;
+            }
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100vh;
+            background-color: rgba(0, 0, 0, 0.7);
+            z-index: 1001;
+            justify-content: center;
+            align-items: center;
+            overflow-y: auto;
+        }
+
+        .modal-content {
+            background-color: white;
+            padding: 2rem;
+            border-radius: 10px;
+            width: 800px;
+            height: 600px;
+            position: relative;
+            margin: 2rem auto;
+        }
+
+        /* Close Button */
+        .close-button {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            font-size: 1.5rem;
+            cursor: pointer;
+            background: none;
+            border: none;
+            color: #1a1a1a;
+            padding: 5px 10px;
+        }
+
+        /* Carousel */
+        .carousel {
+            width: 100%;
+            max-width: 700px;
+            margin: 1rem auto;
+            overflow: hidden;
+        }
+
+        .carousel-images {
+            display: flex;
+            transition: transform 0.3s ease-in-out;
+        }
+
+        .carousel-images img {
+            width: 100%;
+            height: 400px;
+            object-fit: cover;
+            transition: transform 0.3s ease-in-out;
+            flex-shrink: 0;
+        }
+
+        .carousel-button {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background-color: rgba(0, 0, 0, 0.5);
+            color: white;
+            border: none;
+            padding: 10px;
+            cursor: pointer;
+            font-size: 2rem;
+            z-index: 100;
+        }
+
+        /* Service Modal Text Styles */
+        #serviceTitle {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        #serviceDescription {
+            font-size: 1.2rem;
+            margin-bottom: 1rem;
+        }
+
+        #servicePrice {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #1a1a1a;
+        }
+
+        #prevImage {
+            left: 10px;
+        }
+
+        #nextImage {
+            right: 10px;
+        }
+
+        /* Service Card Hover Effects */
+        .service-card {
+            cursor: pointer;
+        }
+
+        #square-booking {
+            background: white;
+            border-radius: 10px;
+            overflow: auto;
+            height: calc(100vh - 100px);
+            margin-top: 40px;
+        }
+
+        @media (max-width: 768px) {
+            #square-booking {
+                height: calc(100vh - 60px);
+                margin-top: 20px;
+            }
+        }
     </style>
 </head>
-
 <body>
-
-    <!-- Header Section -->
+    <div id="square-booking-container" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.8); z-index: 2000;">
+        <div style="position: relative; width: 100%; height: 100%; max-width: 1200px; margin: 0 auto; padding: 20px;">
+            <button onclick="closeBooking()" style="position: absolute; right: 20px; top: 20px; background: white; border: none; padding: 10px; cursor: pointer; border-radius: 5px; z-index: 2001;">Close</button>
+            <div id="square-booking" style="width: 100%; height: 100%; background: white; border-radius: 10px; overflow: hidden;"></div>
+        </div>
+    </div>
     <header>
-        <h1>Mason's Barber Shop</h1>
+        <nav>
+            <div class="nav-links left-links">
+                <a href="#home">HOME</a>
+                <a href="about.html">ABOUT</a>
+            </div>
+            <div class="logo">
+                <img src="./images/mbslogo.webp" alt="Mason's Barber Shop Logo">
+            </div>
+            <div class="nav-links right-links">
+                <a href="#services">SERVICES</a>
+                <a href="#contact">CONTACT</a>
+            </div>
+        </nav>
     </header>
 
-    <!-- Service Cards Section -->
-    <div class="service-cards-container">
-        <div class="service-card" onclick="window.location.href='#'">
-            <img src="https://via.placeholder.com/300x200" alt="Haircut">
-            <div class="service-card-content">
-                <h3>Classic Haircut</h3>
-                <p>A timeless look tailored just for you.</p>
-                <button class="service-card-button">Book Now</button>
-            </div>
+    <section id="home" class="hero">
+        <div class="hero-content">
+            <h1>Welcome to Mason's Barber Shop</h1>
+            <p>Professional haircuts and grooming services for the modern gentleman</p>
+            <a href="https://app.squareup.com/appointments/book/xmzpfaxw6ri5u1/LYTK0TY4TZ3VK/start" class="cta-button" target="_blank">Book Appointment</a>
         </div>
+    </section>
 
-        <div class="service-card" onclick="window.location.href='#'">
-            <img src="https://via.placeholder.com/300x200" alt="Beard Trim">
-            <div class="service-card-content">
-                <h3>Beard Trim</h3>
-                <p>Get your beard perfectly shaped and groomed.</p>
-                <button class="service-card-button">Book Now</button>
-            </div>
-        </div>
+    <div id="serviceModal" class="modal">
+        <div class="modal-content">
+            <button class="close-button">&times;</button>
+            <h2 id="serviceTitle">Service Title</h2>
+            <p id="serviceDescription">Description of the service.</p>
+            <p id="servicePrice">Price: $00.00</p>
 
-        <div class="service-card" onclick="window.location.href='#'">
-            <img src="https://via.placeholder.com/300x200" alt="Shave">
-            <div class="service-card-content">
-                <h3>Traditional Shave</h3>
-                <p>Experience the art of the straight razor shave.</p>
-                <button class="service-card-button">Book Now</button>
+            <!-- Image Carousel -->
+            <div class="carousel">
+                <button id="prevImage" class="carousel-button">&#10094;</button>
+                <div id="carouselImages" class="carousel-images">
+                    <!-- Images will be dynamically added here -->
+                </div>
+                <button id="nextImage" class="carousel-button">&#10095;</button>
             </div>
         </div>
     </div>
 
-    <!-- Footer Section -->
+    <section id="services" class="services">
+        <h2 class="section-title">Our Services</h2>
+        <div class="services-grid">
+            <div class="service-card">
+                <i class="fas fa-cut"></i>
+                <h3>Haircut</h3>
+                <p>Classic and modern haircuts tailored to your style</p>
+                <p>$25</p>
+            </div>
+            <div class="service-card">
+                <div style="margin-bottom: 1rem;">
+                    <img src="./images/450-logo-1712247308.244color-FFC107.svg" alt="Clean Shave Razor Icon" style="width: 50px; height: auto;">
+                </div>
+                <h3>Clean Shave</h3>
+                <p>Traditional hot towel straight razor shave</p>
+                <p>$20</p>
+            </div>
+            <div class="service-card">
+                <i class="fas fa-user-tie"></i>
+                <h3>Beard Trim</h3>
+                <p>Professional beard grooming and styling</p>
+                <p>$15</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="hours" class="hours">
+        <div class="hours-content">
+            <h2 class="section-title">Business Hours</h2>
+            <div class="hours-grid">
+                <div>
+                    <h3>Monday - Friday</h3>
+                    <p>8:00 AM - 5:00 PM</p>
+                </div>
+                <div>
+                    <h3>Saturday-Sunday</h3>
+                    <p>Closed</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="contact" class="contact">
+        <h2 class="section-title">CONTACT US</h2>
+        <div class="contact-container">
+            <div class="contact-info">
+                <div class="info-item">
+                    <i class="fas fa-map-marker-alt"></i>
+                    <h3>LOCATION</h3>
+                    <p>123 Main Street<br>City, State 12345</p>
+                </div>
+                <div class="info-item">
+                    <i class="fas fa-phone"></i>
+                    <h3>PHONE</h3>
+                    <p>(555) 123-4567</p>
+                </div>
+                <div class="info-item">
+                    <i class="fas fa-envelope"></i>
+                    <h3>EMAIL</h3>
+                    <p>info@masonsbarber.com</p>
+                </div>
+            </div>
+            <form class="contact-form">
+                <div class="form-row">
+                    <div class="form-group">
+                        <input type="text" id="firstName" name="firstName" required>
+                        <label for="firstName">First Name</label>
+                    </div>
+                    <div class="form-group">
+                        <input type="text" id="lastName" name="lastName" required>
+                        <label for="lastName">Last Name</label>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <input type="email" id="email" name="email" required>
+                    <label for="email">Email</label>
+                </div>
+                <div class="form-group">
+                    <input type="tel" id="phone" name="phone" required>
+                    <label for="phone">Phone</label>
+                </div>
+                <div class="form-group">
+                    <textarea id="message" name="message" required></textarea>
+                    <label for="message">Message</label>
+                </div>
+                <button type="submit" class="submit-btn">SEND MESSAGE</button>
+            </form>
+        </div>
+    </section>
+
     <footer>
-        <p>&copy; 2024 Mason's Barber Shop | All Rights Reserved</p>
+        <p>&copy; 2024 Mason's Barber Shop. All rights reserved.</p>
     </footer>
 
     <script>
-        // Function to open booking page or show a modal (expandable functionality)
-        document.querySelectorAll('.service-card-button').forEach(button => {
-            button.addEventListener('click', function (e) {
-                e.stopPropagation(); // Prevent the card from redirecting
-                alert('Booking page will open!');
+        document.addEventListener('DOMContentLoaded', function() {
+            // Modal and Service Cards
+            const serviceCards = document.querySelectorAll('.service-card');
+            const modal = document.getElementById('serviceModal');
+            const closeBtn = document.querySelector('.close-button');
+            const serviceTitle = document.getElementById('serviceTitle');
+            const serviceDescription = document.getElementById('serviceDescription');
+            const servicePrice = document.getElementById('servicePrice');
+            const carouselImages = document.getElementById('carouselImages');
+            const prevImage = document.getElementById('prevImage');
+            const nextImage = document.getElementById('nextImage');
+
+            let currentImageIndex = 0;
+            let images = [];
+
+            // Service Data
+            const serviceData = [
+                {
+                    title: 'Haircut',
+                    description: 'Classic and modern haircuts tailored to your style.',
+                    price: '$25',
+                    images: [
+                        './images/haircut1.jpg',
+                        './images/haircut2.jpg',
+                        './images/haircut3.jpg'
+                    ]
+                },
+                {
+                    title: 'Clean Shave',
+                    description: 'Traditional hot towel straight razor shave.',
+                    price: '$20',
+                    images: [
+                        './images/shave1.jpg',
+                        './images/shave2.jpg',
+                        './images/shave3.jpg'
+                    ]
+                },
+                {
+                    title: 'Beard Trim',
+                    description: 'Professional beard grooming and styling.',
+                    price: '$15',
+                    images: [
+                        './images/beard1.jpg',
+                        './images/beard2.jpg',
+                        './images/beard3.jpg'
+                    ]
+                }
+            ];
+
+            // Open Modal for each service card
+            serviceCards.forEach((card, index) => {
+                card.addEventListener('click', () => {
+                    const service = serviceData[index];
+                    serviceTitle.textContent = service.title;
+                    serviceDescription.textContent = service.description;
+                    servicePrice.textContent = `Price: ${service.price}`;
+
+                    // Clear previous images in the carousel
+                    carouselImages.innerHTML = '';
+                    images = service.images;
+                    currentImageIndex = 0;
+
+                    // Add images to the carousel
+                    images.forEach(imgSrc => {
+                        const img = document.createElement('img');
+                        img.src = imgSrc;
+                        carouselImages.appendChild(img);
+                    });
+
+                    // Show modal
+                    modal.style.display = 'flex';
+                });
+            });
+
+            // Close Modal
+            closeBtn.addEventListener('click', () => {
+                modal.style.display = 'none';
+            });
+
+            window.addEventListener('click', (e) => {
+                if (e.target === modal) {
+                    modal.style.display = 'none';
+                }
+            });
+
+            // Carousel Navigation
+            prevImage.addEventListener('click', () => {
+                if (currentImageIndex > 0) {
+                    currentImageIndex--;
+                    updateCarousel();
+                }
+            });
+
+            nextImage.addEventListener('click', () => {
+                if (currentImageIndex < images.length - 1) {
+                    currentImageIndex++;
+                    updateCarousel();
+                }
+            });
+
+            function updateCarousel() {
+                const imgElements = carouselImages.getElementsByTagName('img');
+                Array.from(imgElements).forEach((img, index) => {
+                    img.style.transform = `translateX(-${currentImageIndex * 100}%)`;
+                });
+            }
+        });
+
+        document.addEventListener('DOMContentLoaded', function() {
+            const form = document.querySelector('.contact-form');
+
+            form.addEventListener('submit', function(e) {
+                e.preventDefault();
+
+                // Here you would typically send the form data to your server
+                // For now, we'll just show an alert
+                alert('Thank you for your message! We will get back to you soon.');
+                form.reset();
             });
         });
-    </script>
 
+        let squareInitialized = false;
+
+        function showBooking() {
+            document.getElementById('square-booking-container').style.display = 'block';
+            if (!squareInitialized) {
+                initializeSquareBooking();
+            }
+        }
+
+        function closeBooking() {
+            document.getElementById('square-booking-container').style.display = 'none';
+        }
+
+        function initializeSquareBooking() {
+            const script = document.createElement('script');
+            script.src = "https://app.squareup.com/appointments/book/xmzpfaxw6ri5u1/LYTK0TY4TZ3VK/start";
+            script.onload = function() {
+                squareInitialized = true;
+                SquareAppointmentsFloatingButton.openBookingWidget({
+                    element: document.getElementById('square-booking')
+                });
+            };
+            document.body.appendChild(script);
+        }
+    </script>
 </body>
 </html>
